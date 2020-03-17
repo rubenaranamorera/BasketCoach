@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 class ServiceConfiguration {
 
   @Bean
-  fun teamService(): TeamService{
+  fun teamService(): TeamService {
     return TeamService()
   }
 }

@@ -17,14 +17,27 @@ repositories {
 }
 
 dependencies {
+  // Spring
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+  // jwt
+  implementation("io.jsonwebtoken:jjwt:0.9.1")
+  implementation("javax.xml.bind:jaxb-api:2.3.1")
+
+
   testImplementation("org.springframework.boot:spring-boot-starter-test") {
     exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
   }
+  testImplementation("org.springframework.security:spring-security-test")
 
+  testImplementation("io.rest-assured:rest-assured:4.3.0")
+  testImplementation("io.rest-assured:spring-mock-mvc:4.3.0")
+  testImplementation("io.rest-assured:json-path:4.3.0")
+  testImplementation("io.rest-assured:xml-path:4.3.0")
 }
 
 testSets {
