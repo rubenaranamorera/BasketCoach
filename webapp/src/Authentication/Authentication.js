@@ -1,4 +1,3 @@
-import {BehaviorSubject} from 'rxjs';
 import axios from "axios";
 
 
@@ -22,14 +21,26 @@ export const AuthenticationService = {
 };
 
 function login(username, password) {
-    console.log("get");
-    console.log( axios.get('http://localhost:8081/getauth').data);
-    console.log("post");
+    console.log("login");
+    axios.get('http://localhost:8081/teams').then((response) => {
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    })
+
 
     const userData = axios.post('http://localhost:8081/authenticate', {
         username: username,
         password: password
-    }).data;
+    }).then((response) => {
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    })
 
     console.log(userData)
 //    localStorage.setItem('currentUser', JSON.stringify(userData))

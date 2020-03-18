@@ -18,7 +18,7 @@ class Login extends Component {
                     Enter password
                 </div>
                 <button className="btn btn-dark" onClick={() => {
-                    AuthenticationService.login('username', 'password')
+                    AuthenticationService.login('javainuse', 'password')
                     console.log(AuthenticationService.currentUserValue)
                 }}>
                     Sign In
