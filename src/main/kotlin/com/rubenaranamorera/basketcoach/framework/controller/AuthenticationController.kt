@@ -1,14 +1,15 @@
 package com.rubenaranamorera.basketcoach.framework.controller
 
-import com.rubenaranamorera.basketcoach.framework.model.JwtRequest
-import com.rubenaranamorera.basketcoach.framework.model.JwtResponse
 import com.rubenaranamorera.basketcoach.domain.service.security.JwtTokenUtil
 import com.rubenaranamorera.basketcoach.domain.service.security.JwtUserDetailsService
+import com.rubenaranamorera.basketcoach.framework.model.JwtRequest
+import com.rubenaranamorera.basketcoach.framework.model.JwtResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -22,19 +23,12 @@ class AuthenticationController(
 
 
   @PostMapping("/authenticate")
-  fun createAuthenticationToken(@RequestBody authRequest: JwtRequest): ResponseEntity<*>? {
-
+  fun createAuthenticationToken(@RequestBody authRequest: JwtRequest): ResponseEntity<JwtResponse> {
     authenticate(authRequest.username, authRequest.password)
-
     val userDetails = userDetailsService.loadUserByUsername(authRequest.username)
-
-    println(userDetails)
-
     val token = jwtTokenUtil.generateToken(userDetails)
-
     println(token)
-
-    return ResponseEntity.ok<Any>(JwtResponse(token))
+    return ResponseEntity.ok(JwtResponse(token))
   }
 
   private fun authenticate(username: String, password: String) {

@@ -1,7 +1,9 @@
 package com.rubenaranamorera.basketcoach.framework.controller
 
 import com.rubenaranamorera.basketcoach.domain.service.TeamService
+import com.rubenaranamorera.basketcoach.framework.model.JwtResponse
 import com.rubenaranamorera.basketcoach.framework.model.TeamDto
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,4 +21,6 @@ class TeamController(private val teamService: TeamService) {
   fun obtainTeams(): List<TeamDto> {
     return teamService.obtainAllTeams().map { team -> TeamDto(team) }
   }
+
+
 }

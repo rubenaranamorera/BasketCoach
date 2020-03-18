@@ -1,21 +1,22 @@
 package com.rubenaranamorera.basketcoach.framework
 
 import com.rubenaranamorera.basketcoach.common.BaseIntegrationTest
-import com.rubenaranamorera.basketcoach.framework.model.JwtRequest
-import com.rubenaranamorera.basketcoach.framework.controller.AuthenticationController
+import io.restassured.http.ContentType
+import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
 
 class AuthenticationControllerIntegrationShould : BaseIntegrationTest() {
 
-  @Autowired
-  lateinit var authenticationController: AuthenticationController
-
   @Test
-  fun `authenticate`() {
-
-    authenticationController.createAuthenticationToken(JwtRequest("javainuse", "password"))
-    // given().`when`().post("/auhtenticate").then().assertThat().statusCode(SC_OK)
-
+  fun `return a jwt when authenticate with valid username and password`() {
+    given()
+      .contentType(ContentType.JSON)
+      .body("{\"username\":\"javainuse\",\"password\":\"password\"}")
+      .`when`()
+      .post("/authenticate")
+      .then()
+      .assertThat(status().isOk)
   }
 }
