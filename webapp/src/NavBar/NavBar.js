@@ -11,8 +11,7 @@ function NavBar(props) {
     };
 
     const signIn = () => {
-        authClient.signIn("javainuse", "password")
-            .then(() => props.history.replace('/'));
+        props.history.replace('/login');
     };
 
     return (

@@ -3,8 +3,7 @@ import {Route} from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Home from './Home/Home';
 import Team from './teams/Team';
-
-//import Login from "./Login/Login";
+import Login from "./Login/Login";
 
 class App extends Component {
 
@@ -13,8 +12,8 @@ class App extends Component {
             <div>
                 <NavBar/>
                 <Route exact path='/' component={Home}/>
+                <Route exact path='/login' component={Login}/>
                 <Route exact path='/teams/:teamId' component={Team}/>
-                <p>Work in progress.</p>
             </div>
         );
     }
