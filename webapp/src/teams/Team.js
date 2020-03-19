@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {teamsService} from "./teamsService";
 
 class Team extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            team: null,
+            team: null
         };
     }
 
     async componentDidMount() {
-        const {match: {params}} = this.props;
-        const team = (await axios.get(`http://localhost:8081/teams/${params.teamId}`)).data;
-        this.setState({
-            team,
-        });
+        teamsService.getTeam(0)
+            .then(team => {
+                this.setState({
+                    team,
+                })
+            });
+
     }
 
     render() {

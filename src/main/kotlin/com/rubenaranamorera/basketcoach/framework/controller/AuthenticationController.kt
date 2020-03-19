@@ -28,7 +28,7 @@ class AuthenticationController(
     val userDetails = userDetailsService.loadUserByUsername(authRequest.username)
     val token = jwtTokenUtil.generateToken(userDetails)
     println(token)
-    return ResponseEntity.ok(JwtResponse(token))
+    return ResponseEntity.ok(JwtResponse(token, "some profile"))
   }
 
   private fun authenticate(username: String, password: String) {

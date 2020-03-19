@@ -1,12 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {AuthenticationService} from "../Authentication/Authentication";
+import {Link, withRouter} from 'react-router-dom';
+import authClient from "../Authentication/Auth";
 
-function NavBar() {
+
+function NavBar(props) {
 
     const signOut = () => {
-        AuthenticationService.logout();
-       // history.replace("/")
+        authClient.signOut();
+        props.history.replace('/');
+    };
+
+    const signIn = () => {
+        authClient.signIn("javainuse", "password")
+            .then(() => props.history.replace('/'));
     };
 
     return (
@@ -15,21 +21,22 @@ function NavBar() {
                 BasketCoach
             </Link>
             {
-                !AuthenticationService.isAuthenticated &&
-                <Link className="btn btn-dark" to={"/login"}>Sign In</Link>
+                !authClient.isAuthenticated() &&
+                <button className="btn btn-dark" onClick={() => signIn()}>Sign In</button>
             }
             {
-                AuthenticationService.isAuthenticated &&
+                authClient.isAuthenticated() &&
                 <div>
-                    <label className="mr-2 text-white">{AuthenticationService.currentUserValue().name}</label>
-                    <Link className="btn btn-dark" onClick={() => {
+                    <label className="mr-2 text-white">{authClient.getProfile()}</label>
+                    <button className="btn btn-dark" onClick={() => {
                         signOut()
                     }}>Sign Out
-                    </Link>
+                    </button>
                 </div>
             }
         </nav>
     );
+
 }
 
-export default NavBar;
+export default withRouter(NavBar);

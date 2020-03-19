@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {AuthenticationService} from "../Authentication/Authentication";
+/*import React, {Component} from 'react';
+import {authenticationService} from "../Authentication/authenticationService";
 
 class Login extends Component {
     constructor(props) {
@@ -18,8 +18,8 @@ class Login extends Component {
                     Enter password
                 </div>
                 <button className="btn btn-dark" onClick={() => {
-                    AuthenticationService.login('javainuse', 'password')
-                    console.log(AuthenticationService.currentUserValue)
+                    authenticationService.lo    gin('javainuse', 'password')
+                    console.log(authenticationService.currentUserValue)
                 }}>
                     Sign In
                 </button>
@@ -30,6 +30,4 @@ class Login extends Component {
 }
 
 export default Login;
-
-
-
+*/

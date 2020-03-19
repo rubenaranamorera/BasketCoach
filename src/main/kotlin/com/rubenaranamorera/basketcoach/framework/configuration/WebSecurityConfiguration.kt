@@ -51,7 +51,7 @@ class WebSecurityConfiguration(
       .cors().configurationSource(corsConfigurationSource())
       .and()
       .authorizeRequests()
-      .antMatchers("/", "/teams", "/authenticate", "/getauth", "/postauth").permitAll()
+      .antMatchers("/authenticate").permitAll()
       .anyRequest().authenticated()
       .and()
       .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
