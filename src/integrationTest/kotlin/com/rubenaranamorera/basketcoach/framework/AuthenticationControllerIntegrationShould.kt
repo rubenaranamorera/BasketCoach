@@ -11,11 +11,21 @@ class AuthenticationControllerIntegrationShould : BaseIntegrationTest() {
 
   @Test
   fun `return a jwt when authenticate with valid username and password`() {
+
     given()
       .contentType(ContentType.JSON)
-      .body("{\"username\":\"javainuse\",\"password\":\"password\"}")
+      .body("{\"username\":\"admin\",\"password\":\"admin\"}")
+      .`when`()
+      .post("/signup")
+      .then()
+      .assertThat(status().isOk)
+
+    given()
+      .contentType(ContentType.JSON)
+      .body("{\"username\":\"admin\",\"password\":\"admin\"}")
       .`when`()
       .post("/authenticate")
+
       .then()
       .assertThat(status().isOk)
   }

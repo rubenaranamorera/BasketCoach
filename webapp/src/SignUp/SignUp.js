@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import authClient from "../Authentication/Auth";
 
-class Login extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
 
@@ -10,6 +10,7 @@ class Login extends Component {
             disabled: false,
             username: '',
             password: '',
+            repeatedPassword: '',
         };
     }
 
@@ -25,12 +26,18 @@ class Login extends Component {
         });
     }
 
+    updateRepeatedPassword(value) {
+        this.setState({
+            repeatedPassword: value,
+        });
+    }
+
     async submit() {
         this.setState({
             disabled: true,
         });
 
-        authClient.signIn(this.state.username, this.state.password)
+        authClient.signUp(this.state.username, this.state.password)
             .then(() => this.props.history.push('/'));
     }
 
@@ -66,6 +73,18 @@ class Login extends Component {
                                         placeholder="Password"
                                     />
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Repeat password:</label>
+                                    <input
+                                        disabled={this.state.disabled}
+                                        type="text"
+                                        onBlur={(e) => {
+                                            this.updateRepeatedPassword(e.target.value)
+                                        }}
+                                        className="form-control"
+                                        placeholder="Repeated password"
+                                    />
+                                </div>
                                 <button
                                     disabled={this.state.disabled}
                                     className="btn btn-primary"
@@ -84,4 +103,4 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login);
+export default withRouter(SignUp);

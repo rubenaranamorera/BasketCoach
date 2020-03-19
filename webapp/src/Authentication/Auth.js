@@ -5,6 +5,7 @@ class Auth {
     constructor() {
         this.getProfile = this.getProfile.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
+        this.signUp = this.signUp.bind(this);
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
         this.getJwtToken = this.getJwtToken.bind(this);
@@ -36,6 +37,17 @@ class Auth {
 
     signOut() {
         localStorage.clear()
+    }
+
+    signUp(username, password) {
+        return axios.post('http://localhost:8081/signup', {
+            username: username,
+            password: password
+        }).then(response => {
+            localStorage.setItem('userProfile', response.data.userProfile);
+            localStorage.setItem('jwtToken', response.data.jwtToken);
+            //this.expiresAt = authResult.idTokenPayload.exp * 1000;
+        });
     }
 }
 
