@@ -1,0 +1,22 @@
+spring:
+  main:
+    banner-mode: "OFF"
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    queryTimeout: 60
+    hikari:
+      maximumPoolSize: 15
+      poolName: basketcoach
+      minimumIdle: 2
+  flyway:
+    locations: classpath:db/migration
+    schemas: basketcoach
+
+server:
+  port: 8081
+
+jwt:
+  secret: basketcoach

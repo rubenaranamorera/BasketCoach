@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {teamsService} from "./teamsService";
+import Roster from "./Roster";
 
 class Team extends Component {
 
@@ -26,16 +27,9 @@ class Team extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="jumbotron col-12">
-                        <h1 className="display-3">{team.name}</h1>
-                        <p className="lead">{team.club}</p>
-                        <hr className="my-4"/>
-                        <p>Answers:</p>
-                        {
-                            team.players.map((player, idx) => (
-                                <p className="lead" key={idx}>{player.name}</p>
-                            ))
-                        }
+                    <div className="col-sm-12">
+                        <h1>{team.name} ({team.club})</h1>
+                        <Roster players={team.players}/>
                     </div>
                 </div>
             </div>

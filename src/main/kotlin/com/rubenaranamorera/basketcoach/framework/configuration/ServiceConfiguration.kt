@@ -1,5 +1,6 @@
 package com.rubenaranamorera.basketcoach.framework.configuration
 
+import com.rubenaranamorera.basketcoach.domain.repository.TeamsRepository
 import com.rubenaranamorera.basketcoach.domain.service.TeamService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class ServiceConfiguration {
 
   @Bean
-  fun teamService(): TeamService {
-    return TeamService()
+  fun teamService(teamsRepository: TeamsRepository): TeamService {
+    return TeamService(teamsRepository)
   }
 
   @Bean
