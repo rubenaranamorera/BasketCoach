@@ -7,7 +7,7 @@ import com.rubenaranamorera.basketcoach.domain.service.security.JwtUserDetailsSe
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.provisioning.JdbcUserDetailsManager
 
 @Configuration
 class SecurityConfiguration {
@@ -17,9 +17,9 @@ class SecurityConfiguration {
 
   @Bean
   fun jwtUserDetailsService(
-    inMemoryUserDetailsManager: InMemoryUserDetailsManager,
+    jdbcUserDetailsManager: JdbcUserDetailsManager,
     passwordEncoder: PasswordEncoder
-  ): JwtUserDetailsService = JwtUserDetailsService(inMemoryUserDetailsManager, passwordEncoder)
+  ): JwtUserDetailsService = JwtUserDetailsService(jdbcUserDetailsManager, passwordEncoder)
 
   @Bean
   fun jwtRequestFilter(jwtUserDetailsService: JwtUserDetailsService, jwtTokenUtil: JwtTokenUtil): JwtRequestFilter =
@@ -27,5 +27,6 @@ class SecurityConfiguration {
 
   @Bean
   fun jwtAuthenticationEntryPoint(): JwtAuthenticationEntryPoint = JwtAuthenticationEntryPoint()
+
 
 }

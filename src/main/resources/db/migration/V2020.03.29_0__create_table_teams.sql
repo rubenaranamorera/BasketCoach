@@ -1,13 +1,10 @@
 create table teams
 (
-    id        bigint,
-    name      varchar,
-    club_name varchar,
+    id         bigint primary key,
+    name       varchar,
+    club_name  varchar,
     created_at timestamp,
-    updated_at timestamp,
-
-    constraint pk_teams
-        primary key (id)
+    updated_at timestamp
 );
 
 comment on column teams.id is 'Id of the team';

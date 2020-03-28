@@ -1,32 +1,36 @@
 package com.rubenaranamorera.basketcoach.domain.service.security
 
+import com.rubenaranamorera.basketcoach.domain.model.Role
+import com.rubenaranamorera.basketcoach.domain.model.Role.COACH
 import com.rubenaranamorera.basketcoach.framework.model.UserRequest
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.provisioning.JdbcUserDetailsManager
 
 
 class JwtUserDetailsService(
-  private val inMemoryUserDetailsManager: InMemoryUserDetailsManager,
+  private val userDetailsManager: JdbcUserDetailsManager,
   private val passwordEncoder: PasswordEncoder
 ) : UserDetailsService {
 
 
   fun createUser(userRequest: UserRequest) {
-    inMemoryUserDetailsManager.createUser(
+    userDetailsManager.createUser(
       User(
         userRequest.username,
         passwordEncoder.encode(userRequest.password),
-        emptyList()
+        mutableListOf(SimpleGrantedAuthority("COACH"))
       )
     )
   }
 
   @Throws(UsernameNotFoundException::class)
   override fun loadUserByUsername(username: String): UserDetails {
-    return inMemoryUserDetailsManager.loadUserByUsername(username)
+    return userDetailsManager.loadUserByUsername(username)
   }
 }
